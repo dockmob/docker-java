@@ -63,7 +63,8 @@ RUN mkdir /opt && curl -jksSLH "Cookie: oraclelicense=accept-securebackup-cookie
 RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
 
 # Set DNS cache to 10 seconds (Cache is permanent by default). Network hosts are volatile in Docker clusters.
-RUN grep '^networkaddress.cache.ttl=' cat /opt/${JAVA_PACKAGE}/lib/security/java.security || echo 'networkaddress.cache.ttl=10' >> /opt/${JAVA_PACKAGE}/lib/security/java.security
+RUN grep '^networkaddress.cache.ttl=' /opt/${JAVA_PACKAGE}/lib/security/java.security || echo 'networkaddress.cache.ttl=10' >> /opt/${JAVA_PACKAGE}/lib/security/java.security
+
 
 # Set environment
 ENV JAVA_HOME /opt/${JAVA_PACKAGE}
